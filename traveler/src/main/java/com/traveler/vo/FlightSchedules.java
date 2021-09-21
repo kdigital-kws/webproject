@@ -1,0 +1,83 @@
+package com.traveler.vo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class FlightSchedules {
+
+	
+	
+	private String day;
+	private String flight;
+	private String time;
+	private Date date_from;
+	private Date date_to;
+	private String airline;
+	private String destination;
+	
+	
+	
+	
+	
+	public String getDay() {
+		return day;
+	}
+	public void setDay(String day) {
+		this.day = day;
+	}
+	public String getFlight() {
+		return flight;
+	}
+	public void setFlight(String flight) {
+		this.flight = flight;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public Date getDate_from() {
+		return date_from;
+	}
+	public void setDate_from(Date date_from) {
+		this.date_from = date_from;
+	}
+	public Date getDate_to() {
+		return date_to;
+	}
+	public void setDate_to(Date date_to) {
+		this.date_to = date_to;
+	}
+	public String getAirline() {
+		return airline;
+	}
+	public void setAirline(String airline) {
+		this.airline = airline;
+	}
+	public String getDestination() {
+		return destination;
+	}
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+	public FlightSchedules() {}
+	public FlightSchedules(String day, String flight, String time, Date date_fromDate, Date date_toDate, String airline, String destination) {
+		this.day=day;
+		this.flight=flight;
+		this.time=time;
+		this.date_from=date_fromDate;
+		this.date_to=date_toDate;
+		this.airline=airline;
+		this.destination=destination;
+	}
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return String.format("[%5s][%15s][%10][%10s][%10s][%15s][%15s]",
+							 day,  flight, time, sdf.format(date_from), sdf.format(date_to),airline, destination);
+	}
+
+	
+	
+}
