@@ -2,6 +2,7 @@ package com.traveler.service;
 
 import java.util.List;
 
+import com.traveler.vo.BoardVO;
 import com.traveler.vo.FlightSchedules;
 
 
@@ -13,9 +14,17 @@ public interface TravelerService {
 
 		List<FlightSchedules> readFlightSchedulesFromCsv(String csvPath);
 
-		String[] loadStatsByNumber(String flights, String destination, String airline);
+		
+		
+		List<FlightSchedules> readAirline();
 
-		//int[] loadStatsBySection(int months, int range);
+		List<FlightSchedules> readFlight();
+
+		
+
+		
+
+	
 
 		
 

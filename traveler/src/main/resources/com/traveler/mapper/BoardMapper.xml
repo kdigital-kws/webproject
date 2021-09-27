@@ -7,6 +7,7 @@
 <!-- package-name : com.demoweb.mapper, class-name : BoardMapper -->
 <mapper namespace="com.traveler.mapper.BoardMapper">
 
+<!--  
 	<insert id="insertBoard" parameterType="BoardVO">
 	INSERT INTO BOARD (TITLE, WRITER, CONTENT) 
 	VALUES (#{ title }, #{ writer }, #{ content })
@@ -41,4 +42,14 @@
 	SET TITLE= #{ title }, CONTENT= #{ content }
 	WHERE BOARDNO = #{ boardNo }
 	</update>
+-->
+
+<!-- 	
+	<select id="selectFlightsByFlightsNo" parameterType="int" resultType="BoardVO">
+	SELECT FLIGHT, DATE_FROM, DATE_TO, AIRLINE, DESTINATION 
+	FROM flights_schedules
+	WHERE airline = #{ airline } 
+	</select> 
+-->
+	
 </mapper>

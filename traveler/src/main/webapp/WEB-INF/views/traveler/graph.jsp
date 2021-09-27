@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -68,7 +68,7 @@
 		<div class="pcoded-container navbar-wrapper">
 
 			<jsp:include page="/WEB-INF/views/modules/topbar.jsp" />
-
+	
 			<div class="pcoded-main-container">
 				<div class="pcoded-wrapper">
 					<jsp:include page="/WEB-INF/views/modules/sidebar.jsp" />
@@ -86,16 +86,31 @@
 													<div class="d-inline">
 														<h4>Incheon Airport Chart</h4>
 														<!-- button Default -->
-														<button class="btn btn-primary">Months</button>
-															<select name="airline">
-																<option value="1" ${ flights eq 1 ? "selected" : "" }>대한항공</option>
-																
+														<!--  <button class="btn btn-primary">Months</button> -->
+															<select id="airline" name="airline">
+																<c:forEach var="airline" items="${ airlines }">
+																	<option value="${ airline }" ${ selectedAirline == airline ? "selected" : "" }>${ airline }</option>
+																</c:forEach>
 															</select>
+															
+															 <select name="flight" id="flight">
+															 	<c:choose>
+															 		<c:when test="${ not empty flight }">
+															 			<c:forEach var="flight" items="${ flights }">
+																			<option value="${ flight }">${ flight }</option>
+																		</c:forEach>
+															 		</c:when>
+															 		<c:otherwise>
+															 			<option>항공사를 선택하세요</option>
+															 		</c:otherwise>
+															 	</c:choose>																
+															</select> 
+															<%-- 
 															<select name="flights">
-																<option value="1" ${ flights eq 1 ? "selected" : "" }>KE5679</option>
-																
+																<c:forEach var="flight" items="${ flights }"></c:forEach>	
 															</select>
-															<span>월별 국제항공기 운항 횟수</span>
+															--%>
+															<!-- <span>월별 국제항공기 운항 횟수</span> -->
 														</div>
 														<!--  <span>월별 국제항공기 운항 횟수</span>-->
 													</div>
@@ -291,6 +306,18 @@
 	<!-- Warning Section Ends -->
 	<!-- Required Jquery -->
 	<jsp:include page="/WEB-INF/views/modules/common-js.jsp" />
+	
+	<script type="text/javascript">
+		$(function() {
+			
+			$('#airline').on('change', function(event) {
+				// alert($(this).val());
+				
+				location.href = "graph?airline=" + $(this).val();
+			});
+			
+		})
+	</script>
 </body>
 
 </html>

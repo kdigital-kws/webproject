@@ -151,30 +151,8 @@ public class TravelerDaoImpl implements TravelerDao {
 
 	}
 
-	public String[] selectStatsByNumber(String flights, String destination, String airline) {
 
-		// 조회 결과의 참조를 저장할 변수
-		String[] countByNumber = new String[1500]; // 
-		String sql = "SELECT COUNT(*) " + "FROM Flight_Schedules ";
-				
-		
-
-			int count = jdbcTemplate.queryForObject(sql, new RowMapper<Integer>() {
-
-				@Override
-				public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-					// TODO Auto-generated method stub
-					return rs.getInt(1);
-
-				}
-
-			});
-		
-		
-
-		return countByNumber;
-
-	}
+	
 
 	/*public int[] selectStatsBySection(int months, int range) {
 

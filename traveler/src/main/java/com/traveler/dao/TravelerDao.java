@@ -15,8 +15,4 @@ public interface TravelerDao {
 	
 	// 한 번에 여러 개의 데이터를 insert하는 메서드
 	void insertFlightSchedules2(List<FlightSchedules> schedules);
-	
-	String[] selectStatsByNumber(String flights, String destination, String airline);
-	
-	
 }

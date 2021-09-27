@@ -1,5 +1,7 @@
 package com.traveler.controller;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.traveler.service.TravelerService;
+import com.traveler.vo.BoardVO;
+import com.traveler.vo.FlightSchedules;
 
 @Controller
 @RequestMapping(path = { "/traveler" })
@@ -41,29 +45,43 @@ public class TravelerController {
 		return "redirect:/home";
 	}
 
-	@RequestMapping(path = { "/graph" })
-	public String takeoffNumbers(String flights, String destination, String airline ,Model model) {
+	@GetMapping(path = { "/graph" })
+	public String airline(String airline, String flight, Model model) {
+		
 		// 1. 데이터 읽기 (전달인자를 통해서 수신)
-		String[] countByNumber = travelerService.loadStatsByNumber(flights, destination, airline);
-
-		// 2. 조회된 데이터를 jsp에서 읽을 수 있도록 request 객체에 저장
-		model.addAttribute("countByNumber", countByNumber);
+		
+		// 2-1. 데이터베이스에서 항공사 데이터 조회		
+		List<FlightSchedules> airlines = travelerService.readAirline();
+		
+		// 2-2. 사용자가 전송한 airline 정보가 있으면 airline 정보를 사용해서 데이터베이스에서 항공편 데이터 조회
+		System.out.println(airline);
+		List<FlightSchedules> flights = null;
+		if (airline != null && airline.length() > 0) {
+			// List<FlightSchedules> flights = travelerService.readFlight(); // 기존 코드
+			
+			// 여기에 아래와 같이 데이터 조회 작업을 구현해야 합니다.			
+			// flights = travelerService.데이터조회메서드(ariline);
+		}
+		
+		// 3. 조회된 데이터를 jsp에서 읽을 수 있도록 request 객체에 저장
+		model.addAttribute("selectedAirline", airline);
+		model.addAttribute("airlines", airlines);
 		model.addAttribute("flights", flights);
-		model.addAttribute("destination", destination);
-		model.addAttribute("airline", airline);
+		// System.out.println(airlines);
+		
 		return "traveler/graph";
 	}
 
-	/*@RequestMapping(path = { "/graph-section" })
-	public String statsBySection(@RequestParam(defaultValue = "10") int range,
-			@RequestParam(defaultValue = "5") int months, Model model) {
-
-		int[] countBySection = travelerService.loadStatsBySection(months, range);
-		model.addAttribute("countBySection", countBySection);
-		model.addAttribute("range", range);
-		model.addAttribute("months", months);
-
-		return "traveler/graph-section";
-	}*/
+	/*
+	 * @GetMapping(path = { "/graph" }) public String flight(String flight, Model
+	 * model) { // 1. 데이터 읽기 (전달인자를 통해서 수신) List<FlightSchedules> flights =
+	 * travelerService.readFlight();
+	 * 
+	 * // 2. 조회된 데이터를 jsp에서 읽을 수 있도록 request 객체에 저장
+	 * 
+	 * model.addAttribute("flights", flights); System.out.println(flights);
+	 * 
+	 * System.out.println("flight data !!!"); return "traveler/graph"; }
+	 */
 
 }

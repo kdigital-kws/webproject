@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- package-name : com.demoweb.mapper, class-name : BoardMapper -->
+<mapper namespace="com.traveler.mapper.FlightsMapper">
+
+
+	<!-- <select id="selectFlightsByFlightsNo" parameterType="String" resultType="FlightSchedules">
+		SELECT FLIGHT, DATE_FROM, DATE_TO, AIRLINE, DESTINATION
+		FROM flight_schedules
+		WHERE airline = #{ airline }
+	</select> -->
+
+	<select id="selectAirline"  resultType="String">
+		select distinct airline 
+		from flight_schedules
+	</select>
+	
+<!-- 	<select id="selectFlight"  resultType="String">
+		select distinct flight 
+		from flight_schedules
+	</select>
+ -->
+ 	<select id="selectFlight" parameterType="String" resultType="FlightSchedules">
+		select distinct flight 
+		from flight_schedules
+		WHERE airline = #{ airline }
+	</select> 
+
+</mapper>

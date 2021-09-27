@@ -7,16 +7,27 @@ import java.util.List;
 
 
 import com.opencsv.CSVReader;
+import com.traveler.dao.TravelerDao;
 import com.traveler.dao.TravelerDaoImpl;
+import com.traveler.mapper.FlightsMapper;
+import com.traveler.vo.BoardVO;
 import com.traveler.vo.FlightSchedules;
+
+import lombok.Setter;
 
 public class TravelerServiceImpl implements TravelerService{
 	
+	@Setter
+	private TravelerDao travelerDao;
 	
-	private TravelerDaoImpl travelerDao;
-	public void setTravelerDao(TravelerDaoImpl travelerDao) {
-		this.travelerDao=travelerDao;
-	}
+		@Setter
+		private FlightsMapper flightsMapper;
+	
+	
+		/*
+		 * private TravelerDaoImpl travelerDao; public void
+		 * setTravelerDao(TravelerDaoImpl travelerDao) { this.travelerDao=travelerDao; }
+		 */
 	
 	
 	@Override
@@ -77,12 +88,40 @@ public class TravelerServiceImpl implements TravelerService{
 
 
 	@Override
-	public String[] loadStatsByNumber(String flights, String destination, String airline) {
-		String[] countByNumber = travelerDao.selectStatsByNumber(flights, destination, airline);
-		return countByNumber;
+	public List<FlightSchedules> readAirline() {
+		List<FlightSchedules> airlines = flightsMapper.selectAirline();
+		return airlines;
 	}
 
 
+	@Override
+	public List<FlightSchedules> readFlight() {
+		List<FlightSchedules> flights = flightsMapper.selectFlight();
+		return flights;
+	}
+
+	
+
+	
+
+
+
+
+	/*
+	 * @Override public FlightSchedules selectflightsByflightsNo(String flights) {
+	 * FlightSchedules flight = flightsMapper.selectFlightsByFlightsNo(flights);
+	 * return flight; }
+	 */
+
+
+
+
+
+
+
+
+
+	
 
 	/*@Override
 	public int[] loadStatsBySection(int months, int range) {
