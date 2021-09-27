@@ -13,7 +13,7 @@ $(document).ready(function() {
 });
 
 /*Line chart*/
-function lineChart() {
+/*function lineChart() {
     window.lineChart = Morris.Line({
         element: 'line-example',
         data: [
@@ -32,7 +32,7 @@ function lineChart() {
         labels: ['Series A', 'Series B'],
         lineColors: ['#B4C1D7', '#FF9F55']
     });
-}
+}*/
 
 /*Area chart*/
 /*function areaChart() {
@@ -57,7 +57,7 @@ function lineChart() {
 } */
 
 /*Donut chart*/
-function donutChart() {
+/*function donutChart() {
     window.areaChart = Morris.Donut({
         element: 'donut-example',
         redraw: true,
@@ -68,7 +68,7 @@ function donutChart() {
         ],
         colors: ['#5FBEAA', '#34495E', '#FF9F55']
     });
-}
+}*/
 
 // Morris bar chart
 Morris.Bar({

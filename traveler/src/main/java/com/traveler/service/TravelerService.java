@@ -19,8 +19,8 @@ public interface TravelerService {
 		List<FlightSchedules> readAirline();
 
 		List<FlightSchedules> readFlight();
-
-		
+		List<FlightSchedules> readDateFrom();
+		List<FlightSchedules> readDestination();
 
 		
 

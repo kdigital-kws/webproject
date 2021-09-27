@@ -17,7 +17,7 @@ public interface FlightsMapper {
 	// 인터페이스 메서드는 BoardMapper.xml 파일의 insert, update, select, ... 의 아이디과 일치하도록 작성
 
 	List<FlightSchedules> selectFlight();
-	
-
+	List<FlightSchedules> selectDateFrom();
+	List<FlightSchedules> selectDestination();
 
 }

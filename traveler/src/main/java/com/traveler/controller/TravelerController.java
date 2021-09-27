@@ -46,15 +46,19 @@ public class TravelerController {
 	}
 
 	@GetMapping(path = { "/graph" })
-	public String airline(String airline, String flight, Model model) {
+	public String airline(String airline, String flight, String date_from, String destination, Model model) {
 		
 		// 1. 데이터 읽기 (전달인자를 통해서 수신)
 		
 		// 2-1. 데이터베이스에서 항공사 데이터 조회		
 		List<FlightSchedules> airlines = travelerService.readAirline();
-		
+		List<FlightSchedules> dateFrom = travelerService.readDateFrom();
+		List<FlightSchedules> destinations = travelerService.readDestination();
 		// 2-2. 사용자가 전송한 airline 정보가 있으면 airline 정보를 사용해서 데이터베이스에서 항공편 데이터 조회
 		System.out.println(airline);
+		/*
+		 * System.out.println(destinations); System.out.println(dateFrom);
+		 */
 		List<FlightSchedules> flights = null;
 		if (airline != null && airline.length() > 0) {
 			// List<FlightSchedules> flights = travelerService.readFlight(); // 기존 코드
@@ -65,8 +69,12 @@ public class TravelerController {
 		
 		// 3. 조회된 데이터를 jsp에서 읽을 수 있도록 request 객체에 저장
 		model.addAttribute("selectedAirline", airline);
+		model.addAttribute("selectedDestination", destination);
+		model.addAttribute("selectedDateFrom", date_from);
 		model.addAttribute("airlines", airlines);
 		model.addAttribute("flights", flights);
+		model.addAttribute("dateFrom", dateFrom);
+		model.addAttribute("destinations", destinations);
 		// System.out.println(airlines);
 		
 		return "traveler/graph";

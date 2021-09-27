@@ -100,6 +100,20 @@ public class TravelerServiceImpl implements TravelerService{
 		return flights;
 	}
 
+
+	@Override
+	public List<FlightSchedules> readDateFrom() {
+		List<FlightSchedules> days = flightsMapper.selectDateFrom();
+		return days;
+	}
+
+
+	@Override
+	public List<FlightSchedules> readDestination() {
+		List<FlightSchedules> destinations = flightsMapper.selectDestination();
+		return destinations;
+	}
+
 	
 
 	

@@ -29,5 +29,14 @@
 		from flight_schedules
 		WHERE airline = #{ airline }
 	</select> 
+	<select id="selectDestination"  resultType="String">
+		select distinct destination 
+		from flight_schedules
+	</select>
+	<select id="selectDateFrom"  resultType="String">
+		select distinct month(date_from) 
+		from flight_schedules
+		
+	</select>
 
 </mapper>
