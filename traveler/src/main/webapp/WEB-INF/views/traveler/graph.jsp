@@ -6,7 +6,7 @@
 <html lang="ko">
 
 <head>
-<title>Flight Search</title>
+<title>Flight Chart</title>
 
 <meta charset="utf-8">
 <meta name="viewport"
@@ -119,43 +119,47 @@
 													</div>
 													<div class="card-block">
 
-														<form action="/traveler/flightsearch"
-															id="flightsearchForm">
+														 <form action="graph"
+															id="graphForm">
 															<div class="form-group row">
-																<label class="col-sm-2 col-form-label">목적지</label> <select
-																	id="destination" name="destination">
+																<label class="col-sm-2 col-form-label">목적지</label> 
+																<select	id="destination" name="destination">
 																	<c:forEach var="destination" items="${ destinations }">
-																		<option value="${ destinations }"
-																			<%-- ${ selectedDestination == destination ? "selected" : "" } --%>>${ destination }</option>
+																		<option value="${ destination }"
+																			${ selectedDestination == destination ? "selected" : "" }>${ destination }</option>
 																	</c:forEach>
 																</select>
 															</div>
 															<div class="form-group row">
-																<label class="col-sm-2 col-form-label">항공사</label> <select
-																	id="airline" name="airline">
+																<label class="col-sm-2 col-form-label">항공사</label> 
+																<select id="airline" name="airline">
 																	<c:forEach var="airline" items="${ airlines }">
 																		<option value="${ airline }"
 																			${ selectedAirline == airline ? "selected" : "" }>${ airline }</option>
 																	</c:forEach>
 																</select>
+																 															
+															
 															</div>
 															<div class="form-group row">
-																<label class="col-sm-2 col-form-label">출발 월</label> <select
-																	id="dateFrom" name="dateFrom">
-																	<c:forEach var="dateFrom" items="${ dateFrom }">
-																		<option value="${ dateFrom }"
-																			<%-- ${ selectedDay == day ? "selected" : "" } --%>>${ dateFrom }</option>
+																<label class="col-sm-2 col-form-label">출발 월</label> 
+																<select id="dateFrom" name="dateFrom">
+																	<c:forEach var="date_from" items="${ dateFrom }">
+																		<option value="${ date_from }"
+																			${ selectedDateFrom == date_from ? "selected" : "" }>${ date_from }</option>
 																	</c:forEach>
 																</select>
 															</div>
+															</form>
 													</div>
-													</form>
+													
+													<!-- </form> -->
 
 													<!-- 검색창 -->
 													<div class="card">
 														<div class="card-block">
-															<form class='flightsearch' method="get"
-																action="flightsearch.jsp">
+															<form class='graph' method="get"
+																action="graph">
 																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -163,7 +167,7 @@
 																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 																<button class="btn btn-success btn-round" type="submit"
 																	name="click" value="검색">&nbsp;검색&nbsp;</button>
 																&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
@@ -172,7 +176,7 @@
 															</form>
 														</div>
 													</div>
-													<script type="text/javascript">
+													<!-- <script type="text/javascript">
 														$("a.search").on("click",function(e) {e.preventDefault();
 																			var flightsearchform = $("#flightsearchForm");
 																			if (!searchFrom.find("input[name='destinationkeyword']").val()) {
@@ -186,7 +190,7 @@
 																			flightsearchForm.submit();
 
 																		})
-													</script>
+													</script> -->
 													<!-- 검색결과 -->
 													<div class="card">
 														<div class="card-header">
@@ -211,7 +215,7 @@
 
 													<script type="text/javascript">
 														$(function() {
-
+															
 															$('#airline').on('change',function(event) {
 																// alert($(this).val());
 
@@ -222,10 +226,18 @@
 
 																location.href = "graph?destination="+ $(this).val();
 															});
-															$('#day').on('change',function(event) {
+															$('#dateFrom').on('change',function(event) {
 																// alert($(this).val());
 
 																location.href = "graph?dateFrom="+ $(this).val();
+															});
+															$('#graphForm').on('click', function(event) {
+																
+																// 필요한 경우 입력 데이터 유효성 검사 수행
+
+																// <form id="graphForm" ...> ... </form> 요소를 서버로 전송
+																$('#graphForm').submit();
+																
 															});
 
 														})

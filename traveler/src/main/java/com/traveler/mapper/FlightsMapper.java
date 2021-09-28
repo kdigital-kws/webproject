@@ -1,5 +1,6 @@
 package com.traveler.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -19,5 +20,10 @@ public interface FlightsMapper {
 	List<FlightSchedules> selectFlight();
 	List<FlightSchedules> selectDateFrom();
 	List<FlightSchedules> selectDestination();
+	List<FlightSchedules> selectDay();
+
+	List<String> selectAirlineByDestination(String destination);
+
+	List<String> selectDaysByDestinationAndAirline(HashMap<String, Object> params);
 
 }

@@ -3,6 +3,7 @@ package com.traveler.service;
 import java.io.FileReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -112,6 +113,32 @@ public class TravelerServiceImpl implements TravelerService{
 	public List<FlightSchedules> readDestination() {
 		List<FlightSchedules> destinations = flightsMapper.selectDestination();
 		return destinations;
+	}
+
+
+	@Override
+	public List<FlightSchedules> readDay() {
+		List<FlightSchedules> days = flightsMapper.selectDay();
+		return days;
+	}
+
+
+	@Override
+	public List<String> readAirlineByDestination(String destination) {
+		List<String> flightSchedules = flightsMapper.selectAirlineByDestination(destination);
+		// TODO Auto-generated method stub
+		return flightSchedules;
+	}
+
+
+	@Override
+	public List<String> readDayByDestinationAndAirline(String destination, String airline) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("destination", destination);
+		params.put("airline", airline);
+		List<String> days = flightsMapper.selectDaysByDestinationAndAirline(params);
+		// TODO Auto-generated method stub
+		return days;
 	}
 
 	

@@ -56,6 +56,8 @@ public class TravelerController {
 		List<FlightSchedules> destinations = travelerService.readDestination();
 		// 2-2. 사용자가 전송한 airline 정보가 있으면 airline 정보를 사용해서 데이터베이스에서 항공편 데이터 조회
 		System.out.println(airline);
+		System.out.println(destination);
+		System.out.println(date_from);
 		/*
 		 * System.out.println(destinations); System.out.println(dateFrom);
 		 */
@@ -64,7 +66,7 @@ public class TravelerController {
 			// List<FlightSchedules> flights = travelerService.readFlight(); // 기존 코드
 			
 			// 여기에 아래와 같이 데이터 조회 작업을 구현해야 합니다.			
-			// flights = travelerService.데이터조회메서드(ariline);
+			// flights = travelerService.데이터조회메서드(aline);
 		}
 		
 		// 3. 조회된 데이터를 jsp에서 읽을 수 있도록 request 객체에 저장
@@ -78,6 +80,60 @@ public class TravelerController {
 		// System.out.println(airlines);
 		
 		return "traveler/graph";
+	}
+	
+	@GetMapping(path = { "/search" })
+	public String search(String destination, String airline, String day, Model model) {
+		
+		// 1. 데이터 읽기 (전달인자를 통해서 수신)
+		
+		//List<FlightSchedules> airlines = travelerService.readAirline();
+		//List<FlightSchedules> days = travelerService.readDay();
+		List<FlightSchedules> destinations = travelerService.readDestination();
+		
+		
+		List<String> airlines = null;
+		if (destination != null) {
+			airlines = travelerService.readAirlineByDestination(destination);
+		}
+		
+		List<String> days = null;
+		if (destination != null && airline != null) {
+			days = travelerService.readDayByDestinationAndAirline(destination, airline);
+		}
+		
+		/*
+		 * System.out.println(destinations); System.out.println(dateFrom);
+		 */
+//		List<FlightSchedules> flights = null;
+//		if (airline != null && airline.length() > 0) {
+//			// List<FlightSchedules> flights = travelerService.readFlight(); // 기존 코드
+//			
+//			// 여기에 아래와 같이 데이터 조회 작업을 구현해야 합니다.			
+//			// flights = travelerService.데이터조회메서드(airline);
+//		}
+		
+		// 3. 조회된 데이터를 jsp에서 읽을 수 있도록 request 객체에 저장
+		//model.addAttribute("selectedAirline", airline);
+		model.addAttribute("selectedDestination", destination);
+		model.addAttribute("destinations", destinations);
+		
+		if (airlines != null) {
+			model.addAttribute("airlines", airlines);			
+		}
+		model.addAttribute("selectedAirline", airline);
+		
+		if (days != null) {
+			model.addAttribute("days", days);
+		}
+		
+		//model.addAttribute("selectedDay", day);
+		//model.addAttribute("flights", flights);
+		//model.addAttribute("days", days);
+		
+		// System.out.println(airlines);
+		
+		return "traveler/search";
 	}
 
 	/*

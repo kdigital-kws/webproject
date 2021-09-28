@@ -21,7 +21,11 @@ public interface TravelerService {
 		List<FlightSchedules> readFlight();
 		List<FlightSchedules> readDateFrom();
 		List<FlightSchedules> readDestination();
+		List<FlightSchedules> readDay();
 
+		List<String> readAirlineByDestination(String destination);
+
+		List<String> readDayByDestinationAndAirline(String destination, String airline);
 		
 
 	
