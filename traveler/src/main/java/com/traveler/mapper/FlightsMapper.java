@@ -26,4 +26,6 @@ public interface FlightsMapper {
 
 	List<String> selectDaysByDestinationAndAirline(HashMap<String, Object> params);
 
+	List<String> selectDateFromByDestinationAndAirline(HashMap<String, Object> params);
+
 }

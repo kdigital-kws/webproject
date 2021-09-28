@@ -141,6 +141,17 @@ public class TravelerServiceImpl implements TravelerService{
 		return days;
 	}
 
+
+	@Override
+	public List<String> readDateFromByDestinationAndAirline(String destination, String airline) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("destination", destination);
+		params.put("airline", airline);
+		List<String> dateFrom = flightsMapper.selectDateFromByDestinationAndAirline(params);
+		// TODO Auto-generated method stub
+		return dateFrom;
+	}
+
 	
 
 	

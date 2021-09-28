@@ -26,6 +26,8 @@ public interface TravelerService {
 		List<String> readAirlineByDestination(String destination);
 
 		List<String> readDayByDestinationAndAirline(String destination, String airline);
+
+		List<String> readDateFromByDestinationAndAirline(String destination, String airline);
 		
 
 	

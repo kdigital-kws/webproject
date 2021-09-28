@@ -55,7 +55,11 @@
 		from flight_schedules 
 		where destination = #{ destination } and airline = #{ airline }
 	</select>
-	
+	<select id="selectDateFromByDestinationAndAirline" parameterType="hashmap" resultType="String">
+		select distinct month(date_from) 
+		from flight_schedules 
+		where destination = #{ destination } and airline = #{ airline }
+	</select>
 	
 
 </mapper>

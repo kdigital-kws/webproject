@@ -62,12 +62,12 @@ public class FlightSchedules {
 		this.destination = destination;
 	}
 	public FlightSchedules() {}
-	public FlightSchedules(String day, String flight, String time, Date date_fromDate, Date date_toDate, String airline, String destination) {
+	public FlightSchedules(String day, String flight, String time, Date date_from, Date date_to, String airline, String destination) {
 		this.day=day;
 		this.flight=flight;
 		this.time=time;
-		this.date_from=date_fromDate;
-		this.date_to=date_toDate;
+		this.date_from=date_from;
+		this.date_to=date_to;
 		this.airline=airline;
 		this.destination=destination;
 	}
